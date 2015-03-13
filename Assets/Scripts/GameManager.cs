@@ -7,14 +7,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (instance == null)
-            instance = gameObject;
-        else
-            Destroy(gameObject);
+
     }
 
  
     void Update()
     {
+        
     }
 }
