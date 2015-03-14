@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject[] Houses;
     public GameObject[] Hudlers;
+    public GameObject[] heartImages;
 
     public bool GameOver;
     public float Speed;
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public float spawnAcceleration;
     public float hudlerSpawnAcceleration;
     public int Points;
+    public int Lives;
 
     public bool Shot;
 
@@ -31,6 +33,17 @@ public class LevelManager : MonoBehaviour
     {
         if (!GameOver)
         {
+            if (Lives == 2)
+                heartImages[2].SetActive(false);
+            if (Lives == 1)
+                heartImages[1].SetActive(false);
+            if (Lives == 0)
+            {
+                heartImages[0].SetActive(false);
+                GameOver = true;
+            }
+
+
             if (minRandomTime >= 0.1f) minRandomTime -= spawnAcceleration * Time.deltaTime;
             if (maxRandomTime >= 0.3f) maxRandomTime -= spawnAcceleration * Time.deltaTime;
 
@@ -38,7 +51,8 @@ public class LevelManager : MonoBehaviour
             if (minRandomHudlerTime >= 1f) minRandomHudlerTime -= hudlerSpawnAcceleration * Time.deltaTime;
             if (maxRandomHudlerTime >= 2f) maxRandomHudlerTime -= hudlerSpawnAcceleration * Time.deltaTime;
 
-            Speed += acceleration * Time.deltaTime;
+            if(Speed < 6)
+                Speed += acceleration * Time.deltaTime;
 
             points.text = "Points: " + Points.ToString();
         }
@@ -46,7 +60,16 @@ public class LevelManager : MonoBehaviour
         {
             StopCoroutine(SpawnEnemies());
             StopCoroutine(SpawnHudlers());
+            StartCoroutine(WaitAndLoadGameOver());
+            
         }
+    }
+
+    private IEnumerator WaitAndLoadGameOver()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Application.LoadLevel("GameOver");
     }
 
     private IEnumerator SpawnEnemies()

@@ -47,9 +47,6 @@ public class SetRandomPosition : MonoBehaviour
 
     void Start()
     {
-        
-       
-
         switch (randomType)
         {
             case RandomType.WholeScene:
