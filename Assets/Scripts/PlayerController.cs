@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
         if (right.isHoldDown)
             rigidbody2D.position = new Vector2(rigidbody2D.position.x + speed * Time.deltaTime, rigidbody2D.position.y);
 
+
+        if (levelManager.GameOver)
+            animator.SetBool("Die", true);
     }
 
 
