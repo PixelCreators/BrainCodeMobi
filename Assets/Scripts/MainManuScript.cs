@@ -12,4 +12,19 @@ public class MainManuScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+public void StartButton()
+    {
+        Application.LoadLevel("Game");
+    }
+
+    public void HightButton()
+    {
+        Application.LoadLevel("HightScore");
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
 }
