@@ -8,7 +8,9 @@ public class LevelManager : MonoBehaviour
     public GameObject[] Houses;
     public GameObject[] Hudlers;
     public GameObject[] heartImages;
-    public GameObject rocketPrefab; 
+    public GameObject rocketPrefab;
+
+    public GameManager gameManager;
 
     public bool GameOver;
     public float Speed;
@@ -28,6 +30,7 @@ public class LevelManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         StartCoroutine(SpawnHudlers());
         StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnRocket());
@@ -61,10 +64,11 @@ public class LevelManager : MonoBehaviour
             if(Speed < 6)
                 Speed += acceleration * Time.deltaTime;
 
-            points.text = "Points: " + Points.ToString();
+            points.text = Points.ToString();
         }
         else
         {
+            gameManager.Points = Points;
             StopCoroutine(SpawnEnemies());
             StopCoroutine(SpawnHudlers());
             StopCoroutine(SpawnRocket());

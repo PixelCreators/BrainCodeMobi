@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject firePrefab;
     public AudioClip getSound;
     public AudioClip boomDieSound;
+    public GameObject plusOneParticle; 
 
     private bool notPlayedMusicYet = true;
     public float speed = 2.0f;
@@ -52,13 +53,27 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Target")
         {
             AudioSource.PlayClipAtPoint(getSound, Vector3.zero);
-            levelManager.AddPoints(100);
             other.gameObject.GetComponentInParent<HouseController>().isTarget = false;
+            levelManager.AddPoints(1);
+            Instantiate(plusOneParticle, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject); 
         }
         if(other.gameObject.tag == "Rocket")
         {
             levelManager.Lives = 0;
         }
+    }
+
+    public IEnumerator InverseAxis(float time)
+    {
+        ButtonScript tmp = left;
+        left = right;
+        right = tmp;
+
+        yield return new WaitForSeconds(time);
+
+        tmp = left;
+        left = right;
+        right = tmp;
     }
 }
