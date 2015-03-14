@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject[] Houses;
     public GameObject[] Hudlers;
     public GameObject[] heartImages;
+    public GameObject rocketPrefab; 
 
     public bool GameOver;
     public float Speed;
@@ -18,14 +19,18 @@ public class LevelManager : MonoBehaviour
     public float hudlerSpawnAcceleration;
     public int Points;
     public int Lives;
+    public int rocketPropability;
+
 
     public bool Shot;
+    //TODO: Remove above line
 
     // Use this for initialization
     void Start()
     {
         StartCoroutine(SpawnHudlers());
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnRocket());
     }
 
     // Update is called once per frame
@@ -39,6 +44,8 @@ public class LevelManager : MonoBehaviour
                 heartImages[1].SetActive(false);
             if (Lives == 0)
             {
+                heartImages[2].SetActive(false);
+                heartImages[1].SetActive(false);
                 heartImages[0].SetActive(false);
                 GameOver = true;
             }
@@ -60,6 +67,7 @@ public class LevelManager : MonoBehaviour
         {
             StopCoroutine(SpawnEnemies());
             StopCoroutine(SpawnHudlers());
+            StopCoroutine(SpawnRocket());
             StartCoroutine(WaitAndLoadGameOver());
             
         }
@@ -93,6 +101,21 @@ public class LevelManager : MonoBehaviour
             int rand = Random.Range(0, Hudlers.Length);
 
             Instantiate(Hudlers[rand], Vector3.zero, Quaternion.identity);
+        }
+    }
+
+    private IEnumerator SpawnRocket()
+    {
+        while(!GameOver)
+        {
+            yield return new WaitForSeconds(1f);
+            
+            int rand = Random.Range(1, rocketPropability);
+
+            if(rand == 1)
+            {
+                Instantiate(rocketPrefab, Vector3.zero, Quaternion.identity);
+            }
         }
     }
 
