@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public ButtonScript left;
     public ButtonScript right;
     public GameObject firePrefab;
+    public AudioClip getSound;
+
     public float speed = 2.0f;
 
     void Start()
@@ -40,7 +42,9 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.tag == "Target")
         {
+            AudioSource.PlayClipAtPoint(getSound, Vector3.zero);
             levelManager.AddPoints(100);
+            other.gameObject.GetComponentInParent<HouseController>().isTarget = false;
             Destroy(other.gameObject); 
         }
     }
