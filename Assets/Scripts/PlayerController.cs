@@ -56,5 +56,9 @@ public class PlayerController : MonoBehaviour
             other.gameObject.GetComponentInParent<HouseController>().isTarget = false;
             Destroy(other.gameObject); 
         }
+        if(other.gameObject.tag == "Rocket")
+        {
+            levelManager.Lives = 0;
+        }
     }
 }
