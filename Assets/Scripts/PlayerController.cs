@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private new Transform transform;
+    private new Rigidbody2D rigidbody2D;
 
     public ButtonScript left;
     public ButtonScript right;
@@ -13,16 +13,16 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        transform = gameObject.transform;
+        rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(left.isHoldDown)
-            transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
+            rigidbody2D.position = new Vector2(rigidbody2D.position.x - speed * Time.deltaTime, rigidbody2D.position.y);
         
         if(right.isHoldDown)
-            transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
+            rigidbody2D.position = new Vector2(rigidbody2D.position.x + speed * Time.deltaTime, rigidbody2D.position.y);
         
     }
 }
