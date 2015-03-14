@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public float Speed;
     public float minRandomTime, maxRandomTime;
     public float acceleration;
+    public float spawnAcceleration;
 
     // Use this for initialization
     void Start()
@@ -19,7 +20,11 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if (!GameOver)
+        {
+            if (minRandomTime >= 0.1f) minRandomTime -= spawnAcceleration * Time.deltaTime;
+            if (maxRandomTime >= 0.3f) maxRandomTime -= spawnAcceleration * Time.deltaTime;
             Speed += acceleration * Time.deltaTime;
+        }
         else
             StopCoroutine(SpawnEnemies());
     }
