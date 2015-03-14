@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
 
             int rand = Random.Range(0, Houses.Length);
 
-            Instantiate(EnemiesPrefabs[rand], Vector3.zero, Quaternion.identity);
+            Instantiate(Houses[rand], Vector3.zero, Quaternion.identity);
         }
     }
 }
