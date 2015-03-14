@@ -65,10 +65,10 @@ public class LevelManager : MonoBehaviour
                 Speed += acceleration * Time.deltaTime;
 
             points.text = Points.ToString();
+            gameManager.Points = Points;
         }
         else
         {
-            gameManager.Points = Points;
             StopCoroutine(SpawnEnemies());
             StopCoroutine(SpawnHudlers());
             StopCoroutine(SpawnRocket());

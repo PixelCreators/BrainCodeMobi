@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class EndGameManager : MonoBehaviour
 {
     public Text points;
+    public Text highscore;
+
     private GameManager gameManager;
 
     void Start()
@@ -14,12 +16,14 @@ public class EndGameManager : MonoBehaviour
 
     void Update()
     {
-        points.text = gameManager.Points.ToString();
-
+        Debug.Log(gameManager.Points);
+        Debug.Log(gameManager.Highscore);
         if (gameManager.Points > gameManager.Highscore)
         {
             gameManager.Highscore = gameManager.Points;
             gameManager.Save();
         }
+
+        points.text = gameManager.Points.ToString();
     }
 }

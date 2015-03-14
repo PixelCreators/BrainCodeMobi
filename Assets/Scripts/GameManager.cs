@@ -7,11 +7,11 @@ using System;
 public class GameManager : MonoBehaviour
 {
     static public GameObject instance;
+    
 
     public int Points;
     public int Highscore;
 
-    public string highscoreFilePath;
     void Start()
     {
         if (instance == null)
@@ -22,20 +22,20 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
 
-
-        //Load();
+        
+        Load();
     }
 
  
     void Update()
     {
-        
+
     }
 
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/highscore");
+        FileStream file = File.Create(Application.persistentDataPath + "/highscore.hs");
 
         HighScoresData data = new HighScoresData();
         data.Highscore = Highscore;
@@ -46,15 +46,19 @@ public class GameManager : MonoBehaviour
 
     public void Load()
     {
-        if (File.Exists(highscoreFilePath))
+        if (File.Exists(Application.persistentDataPath + "/highscore.hs"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/highscore", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/highscore.hs", FileMode.Open);
 
             HighScoresData data = (HighScoresData)bf.Deserialize(file);
             file.Close();
 
             Highscore = data.Highscore;
+        }
+        else
+        {
+            Highscore = 0;
         }
     }
 
