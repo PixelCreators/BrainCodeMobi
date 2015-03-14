@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     public ButtonScript right;
     public GameObject firePrefab;
     public AudioClip getSound;
+    public AudioClip boomDieSound;
 
+    private bool notPlayedMusicYet = true;
     public float speed = 2.0f;
 
     void Start()
@@ -34,7 +36,14 @@ public class PlayerController : MonoBehaviour
 
 
         if (levelManager.GameOver)
+        {
             animator.SetBool("Die", true);
+            if (notPlayedMusicYet)
+            {
+                AudioSource.PlayClipAtPoint(boomDieSound, Vector3.zero);
+                notPlayedMusicYet = false;
+            }
+        }
     }
 
 
