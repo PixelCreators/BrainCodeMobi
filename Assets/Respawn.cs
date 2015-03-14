@@ -3,15 +3,13 @@ using System.Collections;
 
 public class Respawn : MonoBehaviour
 {
-    private Transform spawnPoint;
-    private Transform despawnPoint;
+    public Transform spawnPoint;
+    public Transform despawnPoint;
     private new Transform transform;
 
     void Start()
     {
         transform = gameObject.transform;
-        spawnPoint = GameObject.Find("BackgroundSpawnPoint").transform;
-        despawnPoint = GameObject.Find("BackgroundDespawnPoint").transform;
     }
 
     void Update()
