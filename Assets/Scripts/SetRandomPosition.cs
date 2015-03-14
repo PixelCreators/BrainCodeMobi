@@ -5,6 +5,7 @@ public class SetRandomPosition : MonoBehaviour
 {
     private new Transform transform;
 
+    private int oppositeDirection;
     public enum RandomType
     {
         WholeScene,
@@ -26,6 +27,16 @@ public class SetRandomPosition : MonoBehaviour
     void Awake()
     {
         transform = gameObject.transform;
+
+        oppositeDirection = Random.Range(0, 2);
+
+
+        if (oppositeDirection == 0)
+            xIsWidth = true;
+
+        if (oppositeDirection == 1)
+            xIsWidth = false;
+
         if (yIsHeight)
             Offsets.y += Screen.height;
 
@@ -36,7 +47,8 @@ public class SetRandomPosition : MonoBehaviour
 
     void Start()
     {
-
+        
+       
 
         switch (randomType)
         {
