@@ -7,6 +7,7 @@ public class BirdController : MonoBehaviour
     public LevelManager levelManager;
     public GameObject explosionPrefab;
     private Transform killZone;
+    public AudioClip dieSound;
 
     void Start()
     {
@@ -23,9 +24,9 @@ public class BirdController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "Player")
         {
+            AudioSource.PlayClipAtPoint(dieSound, Vector3.zero);
             levelManager.Lives--;
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);

@@ -16,7 +16,6 @@ public class FireScript : MonoBehaviour
     {
         if(other.tag == "Target")
         {
-            Debug.Log("Trafiłem!");
         }
     }
 }
